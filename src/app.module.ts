@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { LightsModule } from './lights/lights.module';
 import { PubSub } from 'graphql-subscriptions';
+import { EmailModule } from './email/email.module';
 
 const pubSub = new PubSub();
 
@@ -27,6 +28,7 @@ const pubSub = new PubSub();
     }),
     AuthModule,
     LightsModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

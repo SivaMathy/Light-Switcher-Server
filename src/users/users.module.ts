@@ -9,9 +9,10 @@ import { AuthService } from 'src/auth/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { RefreshTokenStrategy } from 'src/auth/refreshToken.strategy';
+import { EmailModule } from 'src/email/email.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),AuthModule, PassportModule,
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),AuthModule, PassportModule,EmailModule,
   JwtModule.register({
     secret: 'MATHYTHESCRETECODEFORDEV',
     signOptions: { expiresIn: '20s' },

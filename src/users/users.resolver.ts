@@ -9,12 +9,14 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWTAuthGuard } from 'src/auth/jwt-auth-guard';
 import { Roles, RolesGuard } from 'src/auth/roles.guard';
 import { RolesTypes } from './roles.enum';
+import { EmailService } from 'src/email/email.service';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(
     private readonly usersService: UsersService,
     private readonly authService: AuthService,
+    private readonly emailService:EmailService,
   ) { }
 
   @Mutation(() => User, { name: 'createUser' })
@@ -68,4 +70,20 @@ export class UsersResolver {
     }
     return tokens;
   }
+
+  // invite users
+  @Mutation(() => Boolean, { name: 'sendEmail' })
+  async sendEmail(
+    @Args('invitaionEmail') invitaionEmail: { email: string; subject: string }
+  ): Promise<boolean> {
+    try {
+      const { email, subject } = invitaionEmail;
+      await this.emailService.sendMail(email, subject);
+      return true;
+    } catch (error) {
+      console.error('Error sending email:', error);
+      return false;
+    }
+  }
+  
 }
