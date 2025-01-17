@@ -1,0 +1,35 @@
+type Light {
+  id: String!
+  name: String!
+  state: Boolean!
+  assignees: [String]
+}
+
+input CreateLightInput {
+  name: String!
+  state: Boolean!
+}
+
+input UpdateLightInput {
+  id: String!
+}
+
+type Query {
+  lights: [Light]!
+  light(id: String!): Light
+  findAllLights: [Light]
+  findOneLight(id: String): Light
+}
+
+type Mutation {
+  createLight(createLightInput: CreateLightInput!): Light
+  toggleLightState(updateLightInput: UpdateLightInput!): Light!
+  assignUserToLight(lightId: String, userId: String): Light!
+  # updateLight(updateLightInput: UpdateLightInput!): Light!
+  # removeLight(id: Int!): Light
+}
+
+type Subscription {
+  lightUpdated: Light!
+  lightCreated:Light!
+}

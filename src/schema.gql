@@ -1,0 +1,45 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  name: String!
+  email: String!
+  role: String!
+  token: String!
+}
+
+type Auth {
+  user: User!
+  token: String!
+}
+
+type Light {
+  name: String!
+  state: Boolean!
+}
+
+type Query {
+  findAll: [User!]!
+  user(id: String!): User!
+  findByName(name: String!): User!
+  fillterUserOnly: User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  signin(name: String!, password: String!): Auth!
+  createLight(createLightInput: CreateLightInput!): Light!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+input CreateLightInput {
+  name: String!
+  state: Boolean!
+}

@@ -1,0 +1,38 @@
+type User {
+  name:String!
+  email:String!
+  password:String!
+  role:String!
+  id:String!
+}
+type Auth {
+  user: User!
+  token: String!
+  refreshToken:String!
+}
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role:String!
+}
+
+input UpdateUserInput {
+  id: String!
+}
+
+type Query {
+  users: [User]!
+  user(id: String!): User
+  findAll:[User]
+  findByName(name:String!):User
+  fillterUserOnly:[User]
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  signin(name: String!, password: String!): Auth!
+  refreshTokens(userId: String!, refreshToken: String!): Auth!
+}
