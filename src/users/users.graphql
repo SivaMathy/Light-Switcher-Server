@@ -20,6 +20,10 @@ input CreateUserInput {
 input UpdateUserInput {
   id: String!
 }
+input InvitaionEmail{
+  email:String!
+  subject:String!
+}
 
 type Query {
   users: [User]!
@@ -35,4 +39,5 @@ type Mutation {
   removeUser(id: Int!): User!
   signin(name: String!, password: String!): Auth!
   refreshTokens(userId: String!, refreshToken: String!): Auth!
+  sendEmail(invitaionEmail:InvitaionEmail):Boolean!
 }
